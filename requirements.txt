@@ -1,0 +1,11 @@
+wikipedia-api
+googlesearch-python
+python-docx
+langchain_openai
+langchain_core
+langchain_postgres
+langchain_community
+openai
+python-dotenv
+streamlit
+trafilatura
