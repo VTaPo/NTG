@@ -36,15 +36,14 @@ def search_google(query, api_key, cse_id):
         'cx': cse_id,          # Custom Search Engine ID
         'num': 4               # The number of search results to return
     }
-    st.markdown(query)
     # Send GET request to the API
     response = requests.get(url, params=params)
-    st.markdown(query)
     
     # Check if the request is successful
     if response.status_code == 200:
         search_results = response.json()
         results = search_results.get('items', [])  # Get the search results
+        st.markdown(results)
         webs = []
         for res in results:
             _dict = {}
