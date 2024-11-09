@@ -38,6 +38,7 @@ def search_google(query, api_key, cse_id):
     
     # Send GET request to the API
     response = requests.get(url, params=params)
+    print(response)
     
     # Check if the request is successful
     if response.status_code == 200:
