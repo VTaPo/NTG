@@ -27,9 +27,6 @@ def remove_citations_and_links(text: str) -> str:
     return text
 
 def search_google(query, api_key, cse_id):
-    headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
     # URL endpoint of Google Custom Search API
     url = 'https://www.googleapis.com/customsearch/v1'
     
@@ -51,7 +48,7 @@ def search_google(query, api_key, cse_id):
         for res in results:
             _dict = {}
             _dict['url'] = res['link']
-            _dict['content'] = remove_citations_and_links(extract(fetch_url(res['link'], headers=headers)))
+            _dict['content'] = remove_citations_and_links(extract(fetch_url(res['link'])))
             webs.append(_dict)
         return {"topic":query,"context":webs}
     else:
