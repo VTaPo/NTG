@@ -39,7 +39,7 @@ def search_google(query, api_key, cse_id):
     st.markdown(query)
     # Send GET request to the API
     response = requests.get(url, params=params)
-    st.markdown(response)
+    st.markdown(query)
     
     # Check if the request is successful
     if response.status_code == 200:
