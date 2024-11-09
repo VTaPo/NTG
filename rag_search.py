@@ -35,10 +35,10 @@ def search_google(query, api_key, cse_id):
         'cx': cse_id,          # Custom Search Engine ID
         'num': 4               # The number of search results to return
     }
-    
+    st.markdown(query)
     # Send GET request to the API
     response = requests.get(url, params=params)
-    print(response)
+    st.markdown(response)
     
     # Check if the request is successful
     if response.status_code == 200:
