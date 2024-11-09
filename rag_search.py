@@ -35,7 +35,7 @@ def search_google(query, api_key, cse_id):
         'q': query,            # Query topic
         'key': api_key,        # API Key
         'cx': cse_id,          # Custom Search Engine ID
-        'num': 1               # The number of search results to return
+        'num': 5               # The number of search results to return
     }
     # Send GET request to the API
     response = requests.get(url, params=params)
