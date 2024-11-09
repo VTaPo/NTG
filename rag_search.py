@@ -179,6 +179,8 @@ class ReportGenerator:
             index = final_report['citations']
             ans = final_report['answer']
             new_index, miss_values = re_index(index)
+            st.markdown(index)
+            st.markdown(new_index)
             for i in range(len(miss_values)):
                 need_repl, repl = miss_values[i][0], miss_values[i][1]
                 ans = ans.replace(f'[{need_repl}]', f'[{repl}]')
