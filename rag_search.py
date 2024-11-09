@@ -19,6 +19,7 @@ def highlight_citations(markdown_text):
     return highlighted_text
 
 def remove_citations_and_links(text: str) -> str:
+    st.markdown(text)
     # Remove [number] citations
     text = re.sub(r'\[\d+\]', '', text)
     # Remove URLs
