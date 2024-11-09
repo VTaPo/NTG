@@ -14,6 +14,19 @@ from langchain.schema import Document
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from dotenv import load_dotenv
 
+def re_index(original):
+    new = []
+    miss_values = []
+    flag = False
+    for i in range(len(original)):
+        new.append(i+1)
+        if i+1 not in original:
+            miss_values.append([original[i],i+1])
+            flag = True
+        elif flag:
+            miss_values.append([original[i],i+1])
+    return new, miss_values
+
 def highlight_citations(markdown_text):
     highlighted_text = re.sub(r'\((\d+)\)', r'<span style="color:blue;">(\1)</span>', markdown_text)
     return highlighted_text
@@ -130,13 +143,13 @@ class ReportGenerator:
             )
         return "\n\n".join(formatted_docs)
 
-    def _format_citations(self, docs: List[dict], index: List[int]) -> str:
+    def _format_citations(self, docs: List[dict], index: List[int], new_index: List[int]) -> str:
         """Create detailed citations for the sources section."""
         citations = []
 
         for i in index:
             metadata = docs[i-1]['url']
-            citation = f"[({i})]"
+            citation = f"[({new_index[index.index(i)]})]"
 
             citation += f"({metadata})"
             
@@ -164,15 +177,13 @@ class ReportGenerator:
             # Add sources section
             final_report = report_result.dict()
             index = final_report['citations']
-            print(index)
             ans = final_report['answer']
-            # new_index, miss_values = re_index(index)
-            # print(miss_values)
-            # for i in range(len(miss_values)):
-            #     need_repl, repl = miss_values[i][0], miss_values[i][1]
-            #     ans = ans.replace(f'[{need_repl}]', f'[{repl}]')
+            new_index, miss_values = re_index(index)
+            for i in range(len(miss_values)):
+                need_repl, repl = miss_values[i][0], miss_values[i][1]
+                ans = ans.replace(f'[{need_repl}]', f'[{repl}]')
 
-            full_report = f"{ans}\n\nReferences:\n{self._format_citations(srcs["context"], index)}"
+            full_report = f"{ans}\n\nReferences:\n{self._format_citations(srcs["context"], index, new_index)}"
             full_report = f'''# {question.upper()}\n\n'''+full_report 
             return {
                 "report": full_report,
