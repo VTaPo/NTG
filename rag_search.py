@@ -20,6 +20,7 @@ def highlight_citations(markdown_text):
 
 def remove_citations_and_links(text: str) -> str:
     # Remove [number] citations
+    st.markdown(type(text))
     text = re.sub(r'\[\d+\]', '', text)
     # Remove URLs
     text = re.sub(r'https?://\S+', '', text)
@@ -34,7 +35,7 @@ def search_google(query, api_key, cse_id):
         'q': query,            # Query topic
         'key': api_key,        # API Key
         'cx': cse_id,          # Custom Search Engine ID
-        'num': 4               # The number of search results to return
+        'num': 1               # The number of search results to return
     }
     # Send GET request to the API
     response = requests.get(url, params=params)
