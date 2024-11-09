@@ -80,9 +80,10 @@ class ReportGenerator:
         """Create the report generation chain."""
         report_template = """
         Use only the contents in all <Docs> sections of 'Available Documents' to write a narrative story about {query}.
-        **Do not create or add 'In Conclusion' or 'In Summary'.**
-        **Do not include any information or sections not provided or not accurate.**
-        **Cite sources using (number) format directly in the text.**
+        **Do not create or add 'In Conclusion', 'In Summary', or any introduction. Begin directly with the main content.**
+        **Do not include any information or sections not provided or not accurate.** 
+        
+        **Citation Requirements:** Cite sources directly in the text using the (number) format, referring specifically to the Docs that provide each piece of information.
 
         **Required Length:** The story should be approximately **{len} words** (within ±10 percents of this length).
         Write in **MARKDOWN FORMAT**.
