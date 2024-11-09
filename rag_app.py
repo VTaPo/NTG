@@ -75,11 +75,8 @@ def main():
             # Initialize report generator
             report_gen = ReportGenerator(embeddings, st.session_state["output_len"])
 
-            #Retrieve documents from Google search
-            docs = search_google(st.session_state["topic"], gg_api_key, gg_cse_id)
-
             # Generate report
-            result = report_gen.generate_report(st.session_state["topic"], docs)
+            result = report_gen.generate_report(st.session_state["topic"])
 
             st.session_state.article = result["report"]
             
