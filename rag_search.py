@@ -19,7 +19,6 @@ def highlight_citations(markdown_text):
     return highlighted_text
 
 def remove_citations_and_links(text: str) -> str:
-    st.markdown(text)
     # Remove [number] citations
     text = re.sub(r'\[\d+\]', '', text)
     # Remove URLs
@@ -44,7 +43,6 @@ def search_google(query, api_key, cse_id):
     if response.status_code == 200:
         search_results = response.json()
         results = search_results.get('items', [])  # Get the search results
-        st.markdown(results)
         webs = []
         for res in results:
             _dict = {}
@@ -144,7 +142,7 @@ class ReportGenerator:
         
         return " ".join(citations)
 
-    def generate_report(self, question: str, srcs: dict) -> Dict[str, Any]:
+    def generate_report(self, question: str) -> Dict[str, Any]:
         """
         Generate a report answering the question using retrieved documents.
         
@@ -156,6 +154,9 @@ class ReportGenerator:
             Dict containing the report and metadata
         """
         try:
+            gg_api_key = st.secrets["GG_API_KEY"]
+            gg_cse_id = st.secrets["CSE_ID"]
+            srcs = search_google(question, gg_api_key, gg_cse_id)
             chain_input = {"query": question, "context": srcs}
             report_result = self.report_chain.invoke(chain_input)
             # Add sources section
