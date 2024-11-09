@@ -3,6 +3,7 @@ import requests
 import os
 import re
 from pydantic import BaseModel, Field
+import streamlit as st
 
 import googlesearch
 from trafilatura import fetch_url, extract
