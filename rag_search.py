@@ -80,11 +80,12 @@ class ReportGenerator:
     def _create_report_chain(self):
         """Create the report generation chain."""
         report_template = """
-        Use only the contents in all <Docs> sections of 'Available Documents' to write a narrative story about {query}.
+        Use only the contents in all <Doc#> sections of 'Available Documents' to write a narrative story about {query}.
+        **Must use all provided <Doc#>.**
         **Do not create or add 'In Conclusion', 'In Summary', or any introduction. Begin directly with the main content.**
         **Do not include any information or sections not provided or not accurate.** 
         
-        **Citation Requirements:** Cite sources directly in the text using the (number) format, referring specifically to the <Doc> that provide each piece of information.
+        **Citation Requirements:** Cite sources directly in the text using the (number) format, referring specifically to the <Doc#> that provide each piece of information.
 
         **Required Length:** The story should be approximately **{len} words** (within ±10 percents of this length).
         Write in **MARKDOWN FORMAT**.
