@@ -28,7 +28,7 @@ def re_index(original):
     return new, miss_values
 
 def highlight_citations(markdown_text):
-    highlighted_text = re.sub(r'\((\d+)\)', r'<span style="color:blue;">(\1)</span>', markdown_text)
+    highlighted_text = re.sub(r'\((\d+(?:,\s*\d+)*)\)', r'<span style="color:blue;">(\1)</span>', markdown_text)
     return highlighted_text
 
 def remove_citations_and_links(text: str) -> str:
@@ -157,7 +157,7 @@ class ReportGenerator:
             
             citations.append(citation)
         
-        return "\n".join(citations)
+        return "\n\n".join(citations)
 
     def generate_report(self, question: str) -> Dict[str, Any]:
         """
