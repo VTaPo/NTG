@@ -48,7 +48,7 @@ def search_google(query, api_key, cse_id):
         'q': query,            # Query topic
         'key': api_key,        # API Key
         'cx': cse_id,          # Custom Search Engine ID
-        'num': 4               # The number of search results to return
+        'num': 3               # The number of search results to return
     }
     # Send GET request to the API
     response = requests.get(url, params=params)
@@ -61,7 +61,8 @@ def search_google(query, api_key, cse_id):
         for res in results:
             _dict = {}
             _dict['url'] = res['link']
-            _dict['content'] = remove_citations_and_links(extract(fetch_url(res['link'])))
+            web_text = extract(fetch_url(res['link']), include_comments=False, include_tables=False, target_language='en')
+            _dict['content'] = remove_citations_and_links(web_text)
             _dict['title'] = res['title']
             webs.append(_dict)
         return {"topic":query,"context":webs}
