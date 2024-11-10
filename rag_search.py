@@ -190,7 +190,7 @@ class ReportGenerator:
                 need_repl, repl = miss_values[i][0], miss_values[i][1]
                 ans = ans.replace(f'({need_repl})', f'({repl})')
             ans = highlight_citations(ans)
-            full_report = f"{ans}\n\nReferences:\n{self._format_citations(srcs["context"], index, new_index)}"
+            full_report = f"{ans}\n\nReferences:\n\n{self._format_citations(srcs["context"], index, new_index)}"
             full_report = f'''# {question.upper()}\n\n'''+full_report 
             return {
                 "report": full_report,
