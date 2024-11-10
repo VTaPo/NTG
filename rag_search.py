@@ -62,6 +62,7 @@ def search_google(query, api_key, cse_id):
             _dict = {}
             _dict['url'] = res['link']
             web_text = extract(fetch_url(res['link']), include_comments=False, include_tables=False, target_language='en')
+            web_text = web_text[:int(0.8*len(web_text))]
             _dict['content'] = remove_citations_and_links(web_text)
             _dict['title'] = res['title']
             webs.append(_dict)
