@@ -62,6 +62,7 @@ def search_google(query, api_key, cse_id):
             _dict = {}
             _dict['url'] = res['link']
             _dict['content'] = remove_citations_and_links(extract(fetch_url(res['link'])))
+            _dict['title'] = res['title']
             webs.append(_dict)
         return {"topic":query,"context":webs}
     else:
@@ -149,13 +150,14 @@ class ReportGenerator:
 
         for i in index:
             metadata = docs[i-1]['url']
-            citation = f"[({new_index[index.index(i)]})]"
+            ref_title = docs[i-1]['title']
+            citation = f"[({new_index[index.index(i)]})-{ref_title}]"
 
             citation += f"({metadata})"
             
             citations.append(citation)
         
-        return " ".join(citations)
+        return "\n".join(citations)
 
     def generate_report(self, question: str) -> Dict[str, Any]:
         """
@@ -182,7 +184,7 @@ class ReportGenerator:
             for i in range(len(miss_values)):
                 need_repl, repl = miss_values[i][0], miss_values[i][1]
                 ans = ans.replace(f'({need_repl})', f'({repl})')
-
+            ans = highlight_citations(ans)
             full_report = f"{ans}\n\nReferences:\n{self._format_citations(srcs["context"], index, new_index)}"
             full_report = f'''# {question.upper()}\n\n'''+full_report 
             return {
