@@ -59,10 +59,13 @@ def search_google(query, api_key, cse_id):
         results = search_results.get('items', [])  # Get the search results
         webs = []
         for res in results:
+            threshold = 0.7
             _dict = {}
             _dict['url'] = res['link']
+            if 'wiki' in _dict['url']:
+                threshold = 0.6
             web_text = extract(fetch_url(res['link']), include_comments=False, include_tables=False, target_language='en')
-            web_text = web_text[:int(0.7*len(web_text))]
+            web_text = web_text[:int(threshold*len(web_text))]
             _dict['content'] = remove_citations_and_links(web_text)
             _dict['title'] = res['title']
             webs.append(_dict)
