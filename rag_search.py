@@ -96,20 +96,23 @@ class ReportGenerator:
     def _create_report_chain(self):
         """Create the report generation chain."""
         report_template = """
+        YOU MUST STRICTLY COMPLY WITH THE REQUIREMENTS BELOW:
+
         Use only the contents in all <Doc#> sections of 'Available Documents' to write a narrative story about {query}.
         
         **Must use all provided <Doc#>.**
         
         **Citation Requirements:** Cite sources directly in the text using the (number) format, referring specifically to the <Doc#> that provide each piece of information.
         
-        **Required Length:** The story should be approximately **{len} words** (within ±10 percents of this length).
+        **Required Length:** The story should be approximately **{len} WORDS** (within ±10 percents of this length).
         
         **Do not create or add 'In Conclusion', 'In Summary', or any introduction. Begin directly with the main content.**
         **Do not include any information or sections not provided or not accurate.** 
         
         Write in **MARKDOWN FORMAT**.
-        The story should focus primarily on three sections: **'History'**, **'Applications'**, and **'Common tasks'**. 
-        - If necessary to reach the target length, you may add relevant sections from the provided documents.
+        
+        The story should include two primary sections: **'History'** and **'Applications'**. After these, add any **topic-specific sections** based on the content and relevance to the topic. 
+        - If necessary to reach the target length, additional relevant sections from the provided documents may be included.
         - Do not create content beyond the provided documents to extend the length.
 
         Formatting Guidelines:
