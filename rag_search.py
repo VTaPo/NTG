@@ -112,6 +112,7 @@ class ReportGenerator:
         Write in **MARKDOWN FORMAT**.
         
         The story should include two primary sections: **'History'** and **'Applications'**. After these, add any **topic-specific sections** based on the content and relevance to the topic. 
+        - Ensure that the **length and level of detail** are balanced across sections
         - If necessary to reach the target length, additional relevant sections from the provided documents may be included.
         - Do not create content beyond the provided documents to extend the length.
 
