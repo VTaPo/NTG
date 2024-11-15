@@ -65,7 +65,10 @@ def search_google(query, api_key, cse_id):
             if 'wiki' in _dict['url']:
                 threshold = 0.6
             web_text = extract(fetch_url(res['link']))
-            web_text = web_text[:int(threshold*len(web_text))]
+            try:
+                web_text = web_text[:int(threshold*len(web_text))]
+            except as Error:
+                pass
             _dict['content'] = remove_citations_and_links(web_text)
             _dict['title'] = res['title']
             webs.append(_dict)
