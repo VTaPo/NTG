@@ -67,7 +67,7 @@ def search_google(query, api_key, cse_id):
             web_text = extract(fetch_url(res['link']))
             try:
                 web_text = web_text[:int(threshold*len(web_text))]
-            except as Error:
+            except Exception as e:
                 pass
             _dict['content'] = remove_citations_and_links(web_text)
             _dict['title'] = res['title']
